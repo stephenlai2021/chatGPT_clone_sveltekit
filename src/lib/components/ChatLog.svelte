@@ -3,7 +3,7 @@
   import { chatMsgs } from "$lib/stores/chatMsgsStore";
   import IconChatGpt from "./IconChatGpt.svelte";
 
-  let chat = null  
+  let chat = null;
 
   // beforeUpdate(() => {
   //   autoscroll =
@@ -24,7 +24,10 @@
       style:background={msg.from === "chatbot" ? "var(--bg-inputbox)" : ""}
     >
       <div class="chat-message-wrapper">
-        <div class="avatar" style:background={msg.from === "me" ? "var(--bg-inputbox)" : ""}>
+        <div
+          class="avatar"
+          style:background={msg.from === "me" ? "var(--bg-primary)" : ""}
+        >
           {#if msg.from === "chatbot"}
             <IconChatGpt />
           {/if}
@@ -46,11 +49,32 @@
 </div>
 
 <style>
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
+    background: var(--bg-secondary);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
   .chat-log {
     position: absolute;
     width: 100%;
-    height: calc(100vh - 100px);
-
+    /* height: calc(100vh - 100px); */
+    height: 100vh;
+    bottom: 90px;
     /* height: 100vh; */
     overflow-y: scroll;
   }
