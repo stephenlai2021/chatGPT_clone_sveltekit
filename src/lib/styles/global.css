@@ -1,0 +1,45 @@
+:root {
+  --bg-primary: #343541;
+  --bg-secondary: #202123;
+  --bg-inputbox: #40414f;
+  --bg-chatgpt: #11A37F;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.layout {
+  display: flex;
+  background: var(--bg-primary);
+  height: 100vh;
+}
+
+.sidemenu {
+  width: 240px;
+  padding: 10px;
+  background: var(--bg-secondary);
+}
+
+.side-menu-button {
+  padding: 15px;
+  border: 1px solid white;
+  border-radius: 5px;
+  text-align: left;
+  transition: ease 0.25s all;
+}
+
+.side-menu-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.side-menu-button span {
+  padding-left: 6px;
+  padding-right: 12px;
+}
+
