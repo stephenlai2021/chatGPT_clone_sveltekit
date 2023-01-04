@@ -3,18 +3,52 @@
   import { chatMsgs } from "$lib/stores/chatMsgsStore";
   import IconChatGpt from "./IconChatGpt.svelte";
 
-  let chat = null;
+  let text;
+  let chat;
 
-  // beforeUpdate(() => {
-  //   autoscroll =
-  //     chat && chat.offsetHeight + chat.scrollTop > chat.scrollHeight - 20;
-  // });
+  const scrollToBottom = (node) => {
+    // const scroll = () =>
+      node.scroll({
+        top: node.scrollHeight,
+        behavior: "smooth",
+      });
+    // scroll();
 
-  // afterUpdate(() => {
-  //   if (autoscroll) chat.scrollTo(0, chat.scrollHeight);
-  // });
+    // return { update: scroll };
+  };
 
-  // $: if (chat) chat?.scrollTo(0, chat.scrollHeight);
+  const typeText = (element, text) => {
+    let index = 0;
+
+    // output text every 20ms
+    let interval = setInterval(() => {
+      // if chatBot is typing
+      if (index < text.length) {
+        element.innerHTML += text.charAt(index); // save character
+        index++;
+      } else {
+        // if we have reach the end of text
+        clearInterval(interval);
+      }
+    }, 20);
+  };
+
+  // display three dots one by one
+  const loader = (node) => {
+    node.textContent = "";
+
+    loadInterval = setInterval(() => {
+      node.textContent += ".";
+
+      if (node.textContent === "....") {
+        node.textContent = "";
+      }
+    }, 300);
+  };
+
+  afterUpdate(() => {
+    if ($chatMsgs) scrollToBottom(chat)
+  })
 </script>
 
 <div class="chat-log" bind:this={chat}>
@@ -31,6 +65,7 @@
           {#if msg.from === "chatbot"}
             <IconChatGpt />
           {/if}
+
           {#if msg.from === "me"}
             <img
               src="https://cdn4.iconfinder.com/data/icons/avatar-circle-1-1/72/93-512.png"
@@ -40,6 +75,7 @@
             />
           {/if}
         </div>
+
         {#if msg.from !== ""}
           <div class="message">{msg.msg}</div>
         {/if}
@@ -55,7 +91,6 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    /* background: #f1f1f1; */
     background: var(--bg-secondary);
   }
 
@@ -72,10 +107,8 @@
   .chat-log {
     position: absolute;
     width: 100%;
-    /* height: calc(100vh - 100px); */
-    height: 100vh;
-    bottom: 90px;
-    /* height: 100vh; */
+    height: calc(100vh - 90px);
+    /* bottom: 90px; */
     overflow-y: scroll;
   }
 

@@ -37,7 +37,7 @@ export const POST = async ({ request }) => {
       model: "text-davinci-003",
       prompt: msg,
       temperature: 2,
-      max_tokens: 500,
+      max_tokens: 100,
     });
     console.log("server: ", response.data.choices[0].text);
 
