@@ -1,5 +1,5 @@
 <script>
-  import { beforeUpdate, afterUpdate } from "svelte";
+  import { afterUpdate } from "svelte";
   import { chatMsgs } from "$lib/stores/chatMsgsStore";
   import IconChatGpt from "./IconChatGpt.svelte";
 
@@ -7,14 +7,10 @@
   let chat;
 
   const scrollToBottom = (node) => {
-    // const scroll = () =>
-      node.scroll({
-        top: node.scrollHeight,
-        behavior: "smooth",
-      });
-    // scroll();
-
-    // return { update: scroll };
+    node.scroll({
+      top: node.scrollHeight,
+      behavior: "smooth",
+    });
   };
 
   const typeText = (element, text) => {
@@ -47,8 +43,8 @@
   };
 
   afterUpdate(() => {
-    if ($chatMsgs) scrollToBottom(chat)
-  })
+    if ($chatMsgs) scrollToBottom(chat);
+  });
 </script>
 
 <div class="chat-log" bind:this={chat}>
