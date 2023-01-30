@@ -60,6 +60,10 @@
       width: 90vw;
       /* max-width: 90%; */
     }
+    .chatbox-holder {
+      padding: 10px 0;
+
+    }
   }
 
   .chatbox-holder {
