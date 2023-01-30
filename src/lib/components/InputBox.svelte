@@ -67,7 +67,7 @@
     display: flex;
     justify-content: center;
     background: var(--bg-primary);
-    border: 2px solid green;
+    /* border: 2px solid green; */
   }  
 
   @media (max-width: 750px) {
