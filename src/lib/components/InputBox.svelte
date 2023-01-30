@@ -54,18 +54,7 @@
     width: 750px;
     /* border: 1px solid red; */
   }
-
-  @media (max-width: 750px) {
-    .chatbox-wrapper {
-      width: 90vw;
-      /* max-width: 90%; */
-    }
-    .chatbox-holder {
-      padding: 10px 0;
-
-    }
-  }
-
+ 
   .chatbox-holder {
     position: absolute;
     /* bottom: 30px; */
@@ -78,7 +67,17 @@
     display: flex;
     justify-content: center;
     background: var(--bg-primary);
-    /* border: 2px solid green; */
+    border: 2px solid green;
+  }  
+
+  @media (max-width: 750px) {
+    .chatbox-wrapper {
+      width: 90vw;
+      /* max-width: 90%; */
+    }
+    .chatbox-holder {
+      padding: 10px 0 10px 0;
+    }
   }
 
   @media (max-width: 1026px) {
