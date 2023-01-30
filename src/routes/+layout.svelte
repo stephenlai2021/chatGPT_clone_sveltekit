@@ -4,6 +4,6 @@
 </script>
 
 <div class="layout">
-  <SideMenu />
+  <!-- <SideMenu /> -->
   <slot />
 </div>

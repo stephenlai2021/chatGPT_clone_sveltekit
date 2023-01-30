@@ -50,8 +50,16 @@
 
   .chatbox-wrapper {
     position: relative;
-    max-width: 750px;
+    /* max-width: 750px; */
     width: 750px;
+    /* border: 1px solid red; */
+  }
+
+  @media (max-width: 750px) {
+    .chatbox-wrapper {
+      width: 90vw;
+      /* max-width: 90%; */
+    }
   }
 
   .chatbox-holder {
@@ -66,11 +74,12 @@
     display: flex;
     justify-content: center;
     background: var(--bg-primary);
+    /* border: 2px solid green; */
   }
 
   @media (max-width: 1026px) {
     .chatbox-holder {
-      width: 90%;
+      /* width: 90%; */
     }
   }
 

@@ -106,6 +106,7 @@
     height: calc(100vh - 90px);
     /* bottom: 90px; */
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .chat-message-wrapper {
