@@ -87,7 +87,7 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
+    /* background: var(--bg-secondary); */
   }
 
   /* Handle */
