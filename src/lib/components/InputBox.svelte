@@ -64,6 +64,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     background: var(--bg-primary);
     /* border: 2px solid green; */
   }  
@@ -73,7 +74,7 @@
       width: 90vw;
     }
     .chatbox-holder {
-      padding: 10px 0 10px 0;
+      padding: 15px 0;
     }
   }
 

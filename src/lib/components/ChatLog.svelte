@@ -133,6 +133,12 @@
     overflow-y: scroll;
     overflow-x: hidden;
   }
+  
+  @media (max-width: 750px) {
+    .chat-log {
+      height: calc(100vh - 70px);
+    }
+  }
 
   .chat-message-wrapper {
     display: flex;
