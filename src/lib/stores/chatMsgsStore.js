@@ -12,7 +12,7 @@ export const createPrompt = async (msg) => {
       from: msg.from,
       id: uuidv4(),
       created_at: new Date().toLocaleDateString(),
-    },
+    }
   ]);
 
   const res = await fetch("/api/openai/generatePrompts", {
