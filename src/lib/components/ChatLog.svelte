@@ -1,7 +1,10 @@
 <script>
   import { afterUpdate } from "svelte";
   import { chatMsgs } from "$lib/stores/chatMsgsStore";
+  import { supabase } from "$lib/supabase/config";
+  import { fade, fly } from "svelte/transition";
   import IconChatGpt from "./IconChatGpt.svelte";
+  import IconTrashcan from "./IconTrashcan.svelte";
 
   let text;
   let chat;
@@ -42,6 +45,18 @@
     }, 300);
   };
 
+  const removeMsg = async (id) => {
+    const { data, error } = await supabase
+      .from("openai_chatgpt")
+      .delete()
+      .eq("id", id);
+
+    if (data) console.log("data: ", data);
+    if (error) console.log("error: ", error.message);
+
+    $chatMsgs = $chatMsgs.filter((msg) => msg.id !== id);
+  };
+
   afterUpdate(() => {
     if ($chatMsgs) scrollToBottom(chat);
   });
@@ -53,6 +68,8 @@
       class="chat-message"
       style:background={msg.from === "chatbot" ? "var(--bg-inputbox)" : ""}
     >
+      <!-- out:fly="{{ x: 800, duration: 200 }}" -->
+      <!-- transition:fade={{ duration: 100 }} -->
       <div class="chat-message-wrapper">
         <div
           class="avatar"
@@ -75,12 +92,21 @@
         {#if msg.from !== ""}
           <div class="message">{msg.msg}</div>
         {/if}
+
+        <div class="icon-delete" on:keydown on:click={() => removeMsg(msg.id)}>
+          <IconTrashcan width="20" height="20" />
+        </div>
       </div>
     </div>
   {/each}
 </div>
 
 <style>
+  .icon-delete {
+    margin-left: auto;
+    cursor: pointer;
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -103,14 +129,14 @@
   .chat-log {
     position: absolute;
     width: 100%;
-    height: calc(100vh - 70px);
-    /* bottom: 90px; */
+    height: calc(100vh - 90px);
     overflow-y: scroll;
     overflow-x: hidden;
   }
 
   .chat-message-wrapper {
     display: flex;
+    align-items: center;
 
     max-width: 750px;
     margin: auto;
@@ -137,6 +163,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 4px;
-    /* padding: 2px; */
+    /* border: 1px solid white; */
   }
 </style>

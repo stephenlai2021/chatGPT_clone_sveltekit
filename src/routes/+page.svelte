@@ -6,11 +6,7 @@
 
   export let data
   const { openai } = data
-  let temp = []
-  openai.forEach(item => {
-    temp = [{ from: item.from, msg: item.msg, id: uuidv4(), created_at: new Date().toLocaleDateString() }, ...temp]
-    $chatMsgs = temp
-  })
+  $chatMsgs = openai
 </script>
 
 <section class="chatbox">

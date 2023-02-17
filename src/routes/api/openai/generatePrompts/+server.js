@@ -1,11 +1,9 @@
 import { Configuration, OpenAIApi } from "openai";
-import supabase from "$lib/supabase/config";
-import * as dotenv from "dotenv";
-
-dotenv.config();
+import { supabase } from "$lib/supabase/config";
+import { PUBLIC_OPENAI_API_KEY } from "$env/static/public";
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: PUBLIC_OPENAI_API_KEY,
   organization: "org-CNyAxWDWmtUylw5fFDP3pLmc",
 });
 const openai = new OpenAIApi(configuration);
@@ -14,7 +12,7 @@ export const GET = async () => {
   let { data, error } = await supabase
     .from("openai_chatgpt")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: true });
 
   if (error) console.log("error: ", error);
 
@@ -36,8 +34,8 @@ export const POST = async ({ request }) => {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: msg,
-      temperature: 2,
-      max_tokens: 100,
+      temperature: 0.6,
+      max_tokens: 300,
     });
     console.log("server: ", response.data.choices[0].text);
 
